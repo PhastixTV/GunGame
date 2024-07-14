@@ -1,0 +1,30 @@
+# Das ist der Header der Configuration, hier gibt es alle Beschreibungen
+# ----mysql----
+#  Beschreibung: Hier musst du deine Datenbank Einstellungen treffen
+#
+#  host:
+# Hostname deiner MySQl Datenbank
+#  Default-Value: localhost
+#
+#  password:
+# Passwort deiner MySQl Datenbank
+#  Default-Value: password
+#
+#  database:
+# Zu benutzende Datenbank von MySQl
+#  Default-Value: gungame
+#
+#  port:
+# Port deiner MySQl Datenbank
+#  Default-Value: 3306
+#
+#  username:
+# Username deiner MySQl Datenbank
+#  Default-Value: root
+
+mysql:
+  host: localhost
+  password: minecraft
+  database: minecraft
+  port: 3306
+  username: minecraft

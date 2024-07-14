@@ -1,0 +1,10 @@
+name: GunGame
+version: '${version}'
+main: dev.phastixtv.gungame.GunGame
+api-version: '1.20'
+commands:
+  gungame:
+    aliases:
+      - gg
+  stats:
+
