@@ -24,7 +24,7 @@
 
 mysql:
   host: localhost
-  password: minecraft
-  database: minecraft
   port: 3306
+  database: minecraft
+  password: minecraft
   username: minecraft

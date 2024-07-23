@@ -1,5 +1,6 @@
 package dev.phastixtv.gungame;
 
+import dev.phastixtv.gungame.MySQL.MySQLConnection;
 import dev.phastixtv.gungame.command.GunGameCommand;
 import dev.phastixtv.gungame.command.StatsCommand;
 import dev.phastixtv.gungame.manager.ConfigManager;
@@ -10,8 +11,6 @@ import dev.phastixtv.gungame.listener.player.DeathListener;
 import dev.phastixtv.gungame.listener.connection.PlayerJoinListener;
 import dev.phastixtv.gungame.listener.player.RespawnListener;
 import dev.phastixtv.gungame.spawn.Spawn;
-import dev.phastixtv.gungame.config.SpawnAreaConfig;
-import dev.phastixtv.gungame.config.SpawnConfig;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
@@ -30,6 +29,7 @@ public final class GunGame extends JavaPlugin {
 
     private final Spawn spawn;
     private final ItemBuilder itemBuilder;
+    private final MySQLConnection mySqlConnection;
 
     private final String prefix;
     private final String noPerm;
@@ -44,10 +44,17 @@ public final class GunGame extends JavaPlugin {
 
         spawn = new Spawn();
         itemBuilder = new ItemBuilder();
+        mySqlConnection = new MySQLConnection(
+                configManager.getConfig().getHost(),
+                configManager.getConfig().getPort(),
+                configManager.getConfig().getDatabase(),
+                configManager.getConfig().getUsername(),
+                configManager.getConfig().getPassword()
+        );
 
         prefix = "§f§l[§r§6GunGame§f§l]§r";
         noPerm = prefix + " " + "§cDafür hast du keine Rechte!";
-        nullGamePlayer = "GamePlayer is Null";
+        nullGamePlayer = "GamePlayer ist Null";
     }
 
 
@@ -60,6 +67,7 @@ public final class GunGame extends JavaPlugin {
         setGameRules();
 
         configManager.loadAllConfigs();
+        mySqlConnection.setConnection();
     }
 
     @Override
