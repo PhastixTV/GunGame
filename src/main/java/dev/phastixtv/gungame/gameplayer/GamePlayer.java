@@ -8,8 +8,6 @@ import org.bukkit.entity.Player;
 
 import javax.swing.plaf.SplitPaneUI;
 
-@Getter
-@Setter
 public class GamePlayer {
 
     private final GunGame plugin;
@@ -19,6 +17,7 @@ public class GamePlayer {
     private int levelRecord;
     private int killStreak;
     private int killStreakRecord;
+    private int kills;
 
     public GamePlayer(final Player player, int level) {
         this.player = player;
@@ -79,5 +78,9 @@ public class GamePlayer {
         plugin.getItemManager().giveItems(player);
         player.sendMessage(level + "Level");
         player.sendMessage(killStreak + "Kills");
+    }
+
+    public int getKillStreak() {
+        return killStreak;
     }
 }

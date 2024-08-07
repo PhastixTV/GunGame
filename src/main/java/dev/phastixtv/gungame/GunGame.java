@@ -10,6 +10,7 @@ import dev.phastixtv.gungame.manager.ItemManager;
 import dev.phastixtv.gungame.listener.player.DeathListener;
 import dev.phastixtv.gungame.listener.connection.PlayerJoinListener;
 import dev.phastixtv.gungame.listener.player.RespawnListener;
+import dev.phastixtv.gungame.manager.StatsManager;
 import dev.phastixtv.gungame.spawn.Spawn;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -26,6 +27,7 @@ public final class GunGame extends JavaPlugin {
     private final GamePlayerManager gamePlayerManager;
     private final ItemManager itemManager;
     private final ConfigManager configManager;
+    private final StatsManager statsManager;
 
     private final Spawn spawn;
     private final ItemBuilder itemBuilder;
@@ -41,6 +43,7 @@ public final class GunGame extends JavaPlugin {
         gamePlayerManager = new GamePlayerManager();
         itemManager = new ItemManager();
         configManager = new ConfigManager();
+        statsManager = new StatsManager();
 
         spawn = new Spawn();
         itemBuilder = new ItemBuilder();

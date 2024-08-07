@@ -2,6 +2,7 @@ package dev.phastixtv.gungame.command;
 
 import dev.phastixtv.gungame.GunGame;
 import dev.phastixtv.gungame.gameplayer.GamePlayer;
+import dev.phastixtv.gungame.manager.StatsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,9 +13,11 @@ import org.jetbrains.annotations.NotNull;
 public class StatsCommand implements CommandExecutor {
 
     private final GunGame plugin;
+    private final StatsManager statsManager;
 
     public StatsCommand() {
         this.plugin = GunGame.INSTANCE;
+        this.statsManager = plugin.getStatsManager();
     }
 
     @Override
@@ -39,6 +42,7 @@ public class StatsCommand implements CommandExecutor {
         player.sendMessage("--------------" + gamePlayer.getPlayer().getName() + "--------------");
         player.sendMessage("Level Rekord: " + gamePlayer.getLevelRecord());
         player.sendMessage("Killstreak Rekord: " + gamePlayer.getKillStreakRecord());
+        player.sendMessage("K/D" + )
         player.sendMessage("--------------" + gamePlayer.getPlayer().getName() + "--------------");
     }
 }
