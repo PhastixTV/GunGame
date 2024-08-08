@@ -1,17 +1,5 @@
 package dev.phastixtv.gungame;
 
-import dev.phastixtv.gungame.MySQL.MySQLConnection;
-import dev.phastixtv.gungame.command.GunGameCommand;
-import dev.phastixtv.gungame.command.StatsCommand;
-import dev.phastixtv.gungame.manager.ConfigManager;
-import dev.phastixtv.gungame.manager.GamePlayerManager;
-import dev.phastixtv.gungame.item.ItemBuilder;
-import dev.phastixtv.gungame.manager.ItemManager;
-import dev.phastixtv.gungame.listener.player.DeathListener;
-import dev.phastixtv.gungame.listener.connection.PlayerJoinListener;
-import dev.phastixtv.gungame.listener.player.RespawnListener;
-import dev.phastixtv.gungame.manager.StatsManager;
-import dev.phastixtv.gungame.spawn.Spawn;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
@@ -24,36 +12,12 @@ public final class GunGame extends JavaPlugin {
 
     public static GunGame INSTANCE;
 
-    private final GamePlayerManager gamePlayerManager;
-    private final ItemManager itemManager;
-    private final ConfigManager configManager;
-    private final StatsManager statsManager;
-
-    private final Spawn spawn;
-    private final ItemBuilder itemBuilder;
-    private final MySQLConnection mySqlConnection;
-
     private final String prefix;
     private final String noPerm;
     private final String nullGamePlayer;
 
     public GunGame() {
         INSTANCE = this;
-
-        gamePlayerManager = new GamePlayerManager();
-        itemManager = new ItemManager();
-        configManager = new ConfigManager();
-        statsManager = new StatsManager();
-
-        spawn = new Spawn();
-        itemBuilder = new ItemBuilder();
-        mySqlConnection = new MySQLConnection(
-                configManager.getConfig().getHost(),
-                configManager.getConfig().getPort(),
-                configManager.getConfig().getDatabase(),
-                configManager.getConfig().getUsername(),
-                configManager.getConfig().getPassword()
-        );
 
         prefix = "§f§l[§r§6GunGame§f§l]§r";
         noPerm = prefix + " " + "§cDafür hast du keine Rechte!";
@@ -69,39 +33,23 @@ public final class GunGame extends JavaPlugin {
         registerListener(Bukkit.getPluginManager());
         setGameRules();
 
-        configManager.loadAllConfigs();
-        mySqlConnection.setConnection();
     }
 
     @Override
     public void onDisable() {
-        configManager.saveAllConfigs();
+
     }
 
     private void registerCommands() {
-        var command = this.getCommand("gungame");
-        if (command != null) {
-            command.setExecutor(new GunGameCommand());
-        }
-        command = this.getCommand("stats");
-        if (command != null) {
-            command.setExecutor(new StatsCommand());
-        }
+
     }
 
     private void registerListener(PluginManager pluginManager) {
-        pluginManager.registerEvents(new PlayerJoinListener(), this);
-        pluginManager.registerEvents(new DeathListener(), this);
-        pluginManager.registerEvents(new RespawnListener(), this);
+
     }
 
     private void startMessage() {
-        this.getLogger().info("  _________ __                 __  .__                              ________               ________                       \n");
-        this.getLogger().info(" /   _____//  |______ ________/  |_|__| ____    ____               /  _____/ __ __  ____  /  _____/_____    _____   ____  \n");
-        this.getLogger().info(" \\_____  \\\\   __\\__  \\\\_  __ \\   __\\  |/    \\  / ___\\             /   \\  ___|  |  \\/    \\/   \\  ___\\__  \\  /     \\_/ __ \\ \n");
-        this.getLogger().info(" /        \\|  |  / __ \\|  | \\/|  | |  |   |  \\/ /_/  >            \\    \\_\\  \\  |  /   |  \\    \\_\\  \\/ __ \\|  Y Y  \\  ___/ \n");
-        this.getLogger().info("/_______  /|__| (____  /__|   |__| |__|___|  /\\___  / /\\  /\\  /\\   \\______  /____/|___|  /\\______  (____  /__|_|  /\\___  >\n");
-        this.getLogger().info("        \\/           \\/                    \\//_____/  \\/  \\/  \\/          \\/           \\/        \\/     \\/      \\/     \\/ ");
+
     }
 
     private void setGameRules() {
